@@ -1,0 +1,41 @@
+---
+title: "Sample Project"
+description: |
+  This is a sample project using the penguins dataset from the `palmerpenguins` package
+author:
+  - name: Jenny Sloane
+date: 2021-10-22
+output:
+  distill::distill_article:
+    self_contained: false
+---
+<!-- have to knit before build -->
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+# Load libraries
+```{r message=FALSE, warning=FALSE}
+library(tidyverse)
+library(palmerpenguins) # has penguin data
+library(ggeasy) # has "helper" functions to use with ggplot
+```
+
+# Get a preview of the data 
+```{r}
+head(penguins)
+``` 
+
+# Research Question
+What is the relationship between flipper length and bill length for the 3 penguin species?
+
+```{r}
+ggplot(penguins, aes(bill_length_mm, flipper_length_mm, color=species)) +
+  geom_point() +
+  theme_bw() +
+  labs(x = "Bill Length", y = "Flipper Length") +
+  easy_text_size(15) # from ggeasy
+```
+

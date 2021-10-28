@@ -1,0 +1,6 @@
+---
+title: "Projects"
+description: |
+  Working in small groups, you will have a chance to choose your own research question from either a dataset on the Olympics or a dataset on Climate Change. Using your new R skills, you will work together to analyse the data and even create graphs to answer your research question. We will post all of your analyses and results here!
+listing: posts
+---

@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Amaranth&display=swap');
+/* base variables */
+
+/* Edit the CSS properties in this file to create a custom
+   Distill theme. Only edit values in the right column
+   for each row; values shown are the CSS defaults.
+   To return any property to the default,
+   you may set its value to: unset
+   All rows must end with a semi-colon.                      */
+
+/* Optional: embed custom fonts here with `@import`          */
+/* This must remain at the top of this file.                 */
+
+
+
+html {
+  /*-- Main font sizes --*/
+  --title-size:      50px;
+  --body-size:       18px;
+  --code-size:       16px;
+  --aside-size:      18px;
+  --fig-cap-size:    14px;
+  /*-- Main font colors --*/
+  --title-color:     #2d6a4f;
+  --header-color:    #2d6a4f;
+  --body-color:      #000000;
+  --aside-color:     #000000;
+  --fig-cap-color:   #000000;
+  /*-- Specify custom fonts ~~~ must be imported above   --*/
+  --heading-font:    Amaranth;
+  --mono-font:       monospace;
+  --body-font:       "Open Sans";
+  --navbar-font:     Amaranth;  /* websites + blogs only */
+}
+
+/*-- ARTICLE METADATA --*/
+d-byline {
+  --heading-size:    0.6rem;
+  --heading-color:   rgba(0, 0, 0, 0.5);
+  --body-size:       0.8rem;
+  --body-color:      rgba(0, 0, 0, 0.8);
+}
+
+/*-- ARTICLE TABLE OF CONTENTS --*/
+.d-contents {
+  --heading-size:    18px;
+  --contents-size:   18px;
+}
+
+/*-- ARTICLE APPENDIX --*/
+d-appendix {
+  --heading-size:    15px;
+  --heading-color:   rgba(0, 0, 0, 0.65);
+  --text-size:       18px;
+  --text-color:      rgba(0, 0, 0, 0.5);
+}
+
+/*-- WEBSITE HEADER + FOOTER --*/
+/* These properties only apply to Distill sites and blogs  */
+
+.distill-site-header {
+  --title-size:       27px;
+  --text-color:       rgba(255, 255, 255, 0.8);
+  --text-size:        25px;
+  --hover-color:      white;
+  --bkgd-color:       #2d6a4f;
+}
+
+.distill-site-footer {
+  --text-color:       rgba(255, 255, 255, 0.8);
+  --text-size:        15px;
+  --hover-color:      white;
+  --bkgd-color:       #0F2E3D;
+}
+
+/*-- Additional custom styles --*/
+/* Add any additional CSS rules below                      */
+
+/*Change color of links*/
+a {
+color: #8980F5;
+}
+
+/*Change header colors*/
+h1, h2 {
+  color: #2d6a4f;
+}
+
+h3 {
+  color: #9C6B9C;
+}
+
+/*change body color*/
+
+body {
+  color: #000000;
+  font-size: 18px;
+}
+
+p {
+  color: #000000;
+  font-size: 18px;
+}
+
+
+
+/*remove search function*/
+.nav-search {
+  display: none !important;
+}
+
+.algolia-autocomplete {
+  display: none !important;
+}
+

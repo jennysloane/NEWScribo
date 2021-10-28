@@ -1,1 +1,1 @@
-# NEWScribo
+# codeRs-course

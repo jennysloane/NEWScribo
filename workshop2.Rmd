@@ -1,0 +1,9 @@
+---
+title: "Workshop 2"
+---
+
+In our second workshop we will cover:
+
+- x
+- y
+- z

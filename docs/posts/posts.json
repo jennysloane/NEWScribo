@@ -1,0 +1,19 @@
+[
+  {
+    "path": "posts/2021-10-22-sample-project/",
+    "title": "Sample Project",
+    "description": "This is a sample project using the penguins dataset from the `palmerpenguins` package",
+    "author": [
+      {
+        "name": "Jenny Sloane",
+        "url": {}
+      }
+    ],
+    "date": "2021-10-22",
+    "categories": [],
+    "contents": "\r\n\r\nLoad libraries\r\n\r\n\r\nlibrary(tidyverse)\r\nlibrary(palmerpenguins) # has penguin data\r\nlibrary(ggeasy) # has \"helper\" functions to use with ggplot\r\n\r\n\r\n\r\nGet a preview of the data\r\n\r\n\r\nhead(penguins)\r\n\r\n\r\n# A tibble: 6 x 8\r\n  species island    bill_length_mm bill_depth_mm flipper_length_mm\r\n  <fct>   <fct>              <dbl>         <dbl>             <int>\r\n1 Adelie  Torgersen           39.1          18.7               181\r\n2 Adelie  Torgersen           39.5          17.4               186\r\n3 Adelie  Torgersen           40.3          18                 195\r\n4 Adelie  Torgersen           NA            NA                  NA\r\n5 Adelie  Torgersen           36.7          19.3               193\r\n6 Adelie  Torgersen           39.3          20.6               190\r\n# ... with 3 more variables: body_mass_g <int>, sex <fct>, year <int>\r\n\r\nResearch Question\r\nWhat is the relationship between flipper length and bill length for the 3 penguin species?\r\n\r\n\r\nggplot(penguins, aes(bill_length_mm, flipper_length_mm, color=species)) +\r\n  geom_point() +\r\n  theme_bw() +\r\n  labs(x = \"Bill Length\", y = \"Flipper Length\") +\r\n  easy_text_size(15) # from ggeasy\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
+    "preview": "posts/2021-10-22-sample-project/sample-project_files/figure-html5/unnamed-chunk-3-1.png",
+    "last_modified": "2021-10-26T17:06:49+11:00",
+    "input_file": {}
+  }
+]

@@ -1,0 +1,21 @@
+name: "."
+title: "NEWScribo"
+description: |
+  NEWScribo Website
+output_dir: "docs"
+theme: my-theme.css
+navbar:
+  right:
+    - text: "Home"
+      href: index.html
+    - text: "Getting Started"
+      href: getting_started.html  
+    - text: "Projects"
+      href: projects.html
+    - text: "Materials"
+      menu:
+        - text: "Workshop 1"
+          href: workshop1.html
+        - text: "Workshop 2"
+          href: workshop2.html 
+output: distill::distill_article

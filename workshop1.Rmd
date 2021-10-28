@@ -2,8 +2,4 @@
 title: "Workshop 1"
 ---
 
-In our first workshop we will cover:
-
-- x
-- y
-- z
+We will modify this soon!

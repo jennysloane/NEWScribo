@@ -1,5 +1,5 @@
 ---
-title: "Welcome to the NEWScribo Website"
+title: "Welcome to the NEWScribo Website!"
 site: distill::distill_website
 ---
 
@@ -52,7 +52,7 @@ schedule %>%
 knitr::include_graphics("Jenny_prof_pic.png")
 ```
 
-<p> Jenny is a PhD student studying cognitive science at UNSW, Sydney. She received her Bachelors in psychology from the University of Maryland and her Masters of Science in experimental psychology from Syracuse University. Her research interests include studying the effects of interruptions and time-pressure on decision-making; read more [here](https://blogs.unsw.edu.au/mathssciencechampions/blog/2019/05/the-life-of-a-mathematical-psychologist-jenny-sloane/). Jenny is a committe member of the UNSW codeRs. In her spare time, Jenny enjoys running and watching sports (particularly NFL... go Ravens!). </p>
+<p> Jenny is a PhD student studying cognitive science at UNSW, Sydney. She received her Bachelors in psychology from the University of Maryland and her Masters of Science in experimental psychology from Syracuse University. Her research interests include studying the effects of interruptions and time-pressure on decision-making; you can read more [here](https://blogs.unsw.edu.au/mathssciencechampions/blog/2019/05/the-life-of-a-mathematical-psychologist-jenny-sloane/). Jenny is a committe member of the UNSW codeRs. In her spare time, Jenny enjoys running and watching sports (particularly NFL... go Ravens!). </p>
 
 :::
 :::float-image
@@ -61,7 +61,7 @@ knitr::include_graphics("Jenny_prof_pic.png")
 knitr::include_graphics("Tehilla_prof_pic.png")
 ```
 
-<p> Tehilla is a PhD student studying cognitive science at UNSW, Sydney. She received her Bachelor and Masters of Science degrees from the University of Basel, Switzerland. Her research focuses on the interaction between risky decision-making and information-seeking behaviour; read more [here](https://blogs.unsw.edu.au/mathssciencechampions/blog/2021/04/disentangling-decision-making-meet-tehilla/). Tehilla is a committee member of the UNSW R-codeRs and is a member of the Women in Math & Science Champion Program. Away from work, Tehilla practices kickboxing, takes long morning walks, and enjoys reading about the Philosophy of Science. </p>
+<p> Tehilla is a PhD student studying cognitive science at UNSW, Sydney. She received her Bachelor and Masters of Science degrees from the University of Basel, Switzerland. Her research focuses on the interaction between risky decision-making and information-seeking behaviour; you can read more [here](https://blogs.unsw.edu.au/mathssciencechampions/blog/2021/04/disentangling-decision-making-meet-tehilla/). Tehilla is a committee member of the UNSW R-codeRs and is a member of the Women in Math & Science Champion Program. Away from work, Tehilla practices kickboxing, takes long morning walks, and enjoys reading about the Philosophy of Science. </p>
 
 :::
 

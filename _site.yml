@@ -3,7 +3,7 @@ title: "NEWScribo"
 description: |
   NEWScribo Website
 output_dir: "docs"
-google_analytics: "G-REZ4VHQYKV"
+google_analytics: "G-5XFZ8YP1BN"
 theme: my-theme.css
 navbar:
   right:

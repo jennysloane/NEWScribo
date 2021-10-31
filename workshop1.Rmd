@@ -2,4 +2,38 @@
 title: "Workshop 1"
 ---
 
-We will modify this soon!
+As we mentioned in the first workshop, you will work on a research project in small groups. We saw quite a few of you were interested in sports and climate change, so we've selected two potential data sets for you to use for your projects. All of this data is from the "tidytuesday" Github repository - so it's all free and open source. Tidy Tuesday is a "weekly social data project focused on using `tidyverse` packages to clean, wrangle, tidy, and plot a new dataset every Tuesday." These are two data sets that were used in the past. 
+
+- The Olympics: "This is a historical dataset on the modern Olympic Games, including all the Games from Athens 1896 to Rio 2016". You can find more information about this data set [here](https://github.com/rfordatascience/tidytuesday/blob/master/data/2021/2021-07-27/readme.md)
+
+- Australia Rainfall: This data is "all about Australia, including it's climate over time". You can find more information about this data set [here](https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-01-07/readme.md)
+
+# The Olympics Data
+```{r Olympics}
+#install.packages("tidyverse")
+#install.packages("tidytuesdayR")
+ 
+library(tidytuesdayR) # we need this package to read in our data
+
+tt_olympics <- tidytuesdayR::tt_load('2021-07-27') # the is the week that the Olympic data set was used.
+# this loads in the data we want. tt = tidytuesday
+
+olympics <- tt_olympics$olympics 
+
+reactable::reactable(head(olympics, 20), defaultPageSize=5) # view top 20 rows
+```
+
+# Australia Rainfall Data
+```{r Rainfall}
+#install.packages("tidyverse")
+#install.packages("tidytuesdayR")
+ 
+library(tidytuesdayR) # we need this package to read in our data
+
+tt_rainfall <- tidytuesdayR::tt_load('2020-01-07')  # the is the week that the Olympic data set was used
+# this loads in the data we want. tt = tidytuesday
+
+rainfall <- tt_rainfall$rainfall
+
+reactable::reactable(head(rainfall, 20), defaultPageSize=5) # view top 20 rows
+```

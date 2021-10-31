@@ -2384,6 +2384,12 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   }</style>
   <!--/radix_placeholder_distill-->
   <script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+  <script src="site_libs/core-js-2.5.3/shim.min.js"></script>
+  <script src="site_libs/react-17.0.0/react.min.js"></script>
+  <script src="site_libs/react-17.0.0/react-dom.min.js"></script>
+  <script src="site_libs/reactwidget-1.0.0/react-tools.js"></script>
+  <script src="site_libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+  <script src="site_libs/reactable-binding-0.2.3/reactable.js"></script>
   <script src="site_libs/popper-2.6.0/popper.min.js"></script>
   <link href="site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
   <link href="site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
@@ -2453,8 +2459,71 @@ Materials
 
 
 <div class="d-article">
-<p>We will modify this soon!</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<p>As we mentioned in the first workshop, you will work on a research project in small groups. We saw quite a few of you were interested in sports and climate change, so we’ve selected two potential data sets for you to use for your projects. All of this data is from the “tidytuesday” Github repository - so it’s all free and open source. Tidy Tuesday is a “weekly social data project focused on using <code>tidyverse</code> packages to clean, wrangle, tidy, and plot a new dataset every Tuesday.” These are two data sets that were used in the past.</p>
+<ul>
+<li><p>The Olympics: “This is a historical dataset on the modern Olympic Games, including all the Games from Athens 1896 to Rio 2016”. You can find more information about this data set <a href="https://github.com/rfordatascience/tidytuesday/blob/master/data/2021/2021-07-27/readme.md">here</a></p></li>
+<li><p>Australia Rainfall: This data is “all about Australia, including it’s climate over time”. You can find more information about this data set <a href="https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-01-07/readme.md">here</a></p></li>
+</ul>
+<h1 id="the-olympics-data">The Olympics Data</h1>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'>#install.packages("tidyverse")</span>
+<span class='co'>#install.packages("tidytuesdayR")</span>
+ 
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/thebioengineer/tidytuesdayR'>tidytuesdayR</a></span><span class='op'>)</span> <span class='co'># we need this package to read in our data</span>
+
+<span class='va'>tt_olympics</span> <span class='op'>&lt;-</span> <span class='fu'>tidytuesdayR</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/tidytuesdayR/man/tt_load.html'>tt_load</a></span><span class='op'>(</span><span class='st'>'2021-07-27'</span><span class='op'>)</span> <span class='co'># the is the week that the Olympic data set was used.</span>
+</code></pre>
+</div>
+<pre><code>
+    Downloading file 1 of 2: `olympics.csv`
+    Downloading file 2 of 2: `regions.csv`</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># this loads in the data we want. tt = tidytuesday</span>
+
+<span class='va'>olympics</span> <span class='op'>&lt;-</span> <span class='va'>tt_olympics</span><span class='op'>$</span><span class='va'>olympics</span> 
+
+<span class='fu'>reactable</span><span class='fu'>::</span><span class='fu'><a href='https://glin.github.io/reactable/reference/reactable.html'>reactable</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>olympics</span>, <span class='fl'>20</span><span class='op'>)</span>, defaultPageSize<span class='op'>=</span><span class='fl'>5</span><span class='op'>)</span> <span class='co'># view top 20 rows</span>
+</code></pre>
+</div>
+<div id="htmlwidget-ce182baca208ccc5b2eb" class="reactable html-widget" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-ce182baca208ccc5b2eb">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"id":[1,2,3,4,5,5,5,5,5,5,6,6,6,6,6,6,6,6,7,7],"name":["A Dijiang","A Lamusi","Gunnar Nielsen Aaby","Edgar Lindenau Aabye","Christine Jacoba Aaftink","Christine Jacoba Aaftink","Christine Jacoba Aaftink","Christine Jacoba Aaftink","Christine Jacoba Aaftink","Christine Jacoba Aaftink","Per Knut Aaland","Per Knut Aaland","Per Knut Aaland","Per Knut Aaland","Per Knut Aaland","Per Knut Aaland","Per Knut Aaland","Per Knut Aaland","John Aalberg","John Aalberg"],"sex":["M","M","M","M","F","F","F","F","F","F","M","M","M","M","M","M","M","M","M","M"],"age":[24,23,24,34,21,21,25,25,27,27,31,31,31,31,33,33,33,33,31,31],"height":[180,170,"NA","NA",185,185,185,185,185,185,188,188,188,188,188,188,188,188,183,183],"weight":[80,60,"NA","NA",82,82,82,82,82,82,75,75,75,75,75,75,75,75,72,72],"team":["China","China","Denmark","Denmark/Sweden","Netherlands","Netherlands","Netherlands","Netherlands","Netherlands","Netherlands","United States","United States","United States","United States","United States","United States","United States","United States","United States","United States"],"noc":["CHN","CHN","DEN","DEN","NED","NED","NED","NED","NED","NED","USA","USA","USA","USA","USA","USA","USA","USA","USA","USA"],"games":["1992 Summer","2012 Summer","1920 Summer","1900 Summer","1988 Winter","1988 Winter","1992 Winter","1992 Winter","1994 Winter","1994 Winter","1992 Winter","1992 Winter","1992 Winter","1992 Winter","1994 Winter","1994 Winter","1994 Winter","1994 Winter","1992 Winter","1992 Winter"],"year":[1992,2012,1920,1900,1988,1988,1992,1992,1994,1994,1992,1992,1992,1992,1994,1994,1994,1994,1992,1992],"season":["Summer","Summer","Summer","Summer","Winter","Winter","Winter","Winter","Winter","Winter","Winter","Winter","Winter","Winter","Winter","Winter","Winter","Winter","Winter","Winter"],"city":["Barcelona","London","Antwerpen","Paris","Calgary","Calgary","Albertville","Albertville","Lillehammer","Lillehammer","Albertville","Albertville","Albertville","Albertville","Lillehammer","Lillehammer","Lillehammer","Lillehammer","Albertville","Albertville"],"sport":["Basketball","Judo","Football","Tug-Of-War","Speed Skating","Speed Skating","Speed Skating","Speed Skating","Speed Skating","Speed Skating","Cross Country Skiing","Cross Country Skiing","Cross Country Skiing","Cross Country Skiing","Cross Country Skiing","Cross Country Skiing","Cross Country Skiing","Cross Country Skiing","Cross Country Skiing","Cross Country Skiing"],"event":["Basketball Men's Basketball","Judo Men's Extra-Lightweight","Football Men's Football","Tug-Of-War Men's Tug-Of-War","Speed Skating Women's 500 metres","Speed Skating Women's 1,000 metres","Speed Skating Women's 500 metres","Speed Skating Women's 1,000 metres","Speed Skating Women's 500 metres","Speed Skating Women's 1,000 metres","Cross Country Skiing Men's 10 kilometres","Cross Country Skiing Men's 50 kilometres","Cross Country Skiing Men's 10/15 kilometres Pursuit","Cross Country Skiing Men's 4 x 10 kilometres Relay","Cross Country Skiing Men's 10 kilometres","Cross Country Skiing Men's 30 kilometres","Cross Country Skiing Men's 10/15 kilometres Pursuit","Cross Country Skiing Men's 4 x 10 kilometres Relay","Cross Country Skiing Men's 10 kilometres","Cross Country Skiing Men's 50 kilometres"],"medal":[null,null,null,"Gold",null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]},"columns":[{"accessor":"id","name":"id","type":"numeric"},{"accessor":"name","name":"name","type":"character"},{"accessor":"sex","name":"sex","type":"character"},{"accessor":"age","name":"age","type":"numeric"},{"accessor":"height","name":"height","type":"numeric"},{"accessor":"weight","name":"weight","type":"numeric"},{"accessor":"team","name":"team","type":"character"},{"accessor":"noc","name":"noc","type":"character"},{"accessor":"games","name":"games","type":"character"},{"accessor":"year","name":"year","type":"numeric"},{"accessor":"season","name":"season","type":"character"},{"accessor":"city","name":"city","type":"character"},{"accessor":"sport","name":"sport","type":"character"},{"accessor":"event","name":"event","type":"character"},{"accessor":"medal","name":"medal","type":"character"}],"defaultPageSize":5,"paginationType":"numbers","showPageInfo":true,"minRows":1,"dataKey":"61e936b19d8fdf22eb35a78d33dd4f51","key":"61e936b19d8fdf22eb35a78d33dd4f51"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+</div>
+<h1 id="australia-rainfall-data">Australia Rainfall Data</h1>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'>#install.packages("tidyverse")</span>
+<span class='co'>#install.packages("tidytuesdayR")</span>
+ 
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/thebioengineer/tidytuesdayR'>tidytuesdayR</a></span><span class='op'>)</span> <span class='co'># we need this package to read in our data</span>
+
+<span class='va'>tt_rainfall</span> <span class='op'>&lt;-</span> <span class='fu'>tidytuesdayR</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/tidytuesdayR/man/tt_load.html'>tt_load</a></span><span class='op'>(</span><span class='st'>'2020-01-07'</span><span class='op'>)</span>  <span class='co'># the is the week that the Olympic data set was used</span>
+</code></pre>
+</div>
+<pre><code>
+    Downloading file 1 of 11: `fire_nrt_M6_94771.csv`
+    Downloading file 2 of 11: `IDCJAC0009_009151_1800_Data.csv`
+    Downloading file 3 of 11: `IDCJAC0009_023011_1800_Data.csv`
+    Downloading file 4 of 11: `IDCJAC0009_040383_1800_Data.csv`
+    Downloading file 5 of 11: `IDCJAC0009_040913_1800_Data.csv`
+    Downloading file 6 of 11: `IDCJAC0009_066062_1800_Data.csv`
+    Downloading file 7 of 11: `IDCJAC0009_070351_1800_Data.csv`
+    Downloading file 8 of 11: `IDCJAC0009_086232_1800_Data.csv`
+    Downloading file 9 of 11: `MODIS_C6_Australia_and_New_Zealand_7d.csv`
+    Downloading file 10 of 11: `rainfall.csv`
+    Downloading file 11 of 11: `temperature.csv`</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># this loads in the data we want. tt = tidytuesday</span>
+
+<span class='va'>rainfall</span> <span class='op'>&lt;-</span> <span class='va'>tt_rainfall</span><span class='op'>$</span><span class='va'>rainfall</span>
+
+<span class='fu'>reactable</span><span class='fu'>::</span><span class='fu'><a href='https://glin.github.io/reactable/reference/reactable.html'>reactable</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>rainfall</span>, <span class='fl'>20</span><span class='op'>)</span>, defaultPageSize<span class='op'>=</span><span class='fl'>5</span><span class='op'>)</span> <span class='co'># view top 20 rows</span>
+</code></pre>
+</div>
+<div id="htmlwidget-b021ae5ef748d7ded8b4" class="reactable html-widget" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-b021ae5ef748d7ded8b4">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"station_code":["009151","009151","009151","009151","009151","009151","009151","009151","009151","009151","009151","009151","009151","009151","009151","009151","009151","009151","009151","009151"],"city_name":["Perth","Perth","Perth","Perth","Perth","Perth","Perth","Perth","Perth","Perth","Perth","Perth","Perth","Perth","Perth","Perth","Perth","Perth","Perth","Perth"],"year":[1967,1967,1967,1967,1967,1967,1967,1967,1967,1967,1967,1967,1967,1967,1967,1967,1967,1967,1967,1967],"month":["01","01","01","01","01","01","01","01","01","01","01","01","01","01","01","01","01","01","01","01"],"day":["01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20"],"rainfall":["NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA"],"period":["NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA"],"quality":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],"lat":[-31.96,-31.96,-31.96,-31.96,-31.96,-31.96,-31.96,-31.96,-31.96,-31.96,-31.96,-31.96,-31.96,-31.96,-31.96,-31.96,-31.96,-31.96,-31.96,-31.96],"long":[115.79,115.79,115.79,115.79,115.79,115.79,115.79,115.79,115.79,115.79,115.79,115.79,115.79,115.79,115.79,115.79,115.79,115.79,115.79,115.79],"station_name":["Subiaco Wastewater Treatment Plant","Subiaco Wastewater Treatment Plant","Subiaco Wastewater Treatment Plant","Subiaco Wastewater Treatment Plant","Subiaco Wastewater Treatment Plant","Subiaco Wastewater Treatment Plant","Subiaco Wastewater Treatment Plant","Subiaco Wastewater Treatment Plant","Subiaco Wastewater Treatment Plant","Subiaco Wastewater Treatment Plant","Subiaco Wastewater Treatment Plant","Subiaco Wastewater Treatment Plant","Subiaco Wastewater Treatment Plant","Subiaco Wastewater Treatment Plant","Subiaco Wastewater Treatment Plant","Subiaco Wastewater Treatment Plant","Subiaco Wastewater Treatment Plant","Subiaco Wastewater Treatment Plant","Subiaco Wastewater Treatment Plant","Subiaco Wastewater Treatment Plant"]},"columns":[{"accessor":"station_code","name":"station_code","type":"character"},{"accessor":"city_name","name":"city_name","type":"character"},{"accessor":"year","name":"year","type":"numeric"},{"accessor":"month","name":"month","type":"character"},{"accessor":"day","name":"day","type":"character"},{"accessor":"rainfall","name":"rainfall","type":"numeric"},{"accessor":"period","name":"period","type":"numeric"},{"accessor":"quality","name":"quality","type":"character"},{"accessor":"lat","name":"lat","type":"numeric"},{"accessor":"long","name":"long","type":"numeric"},{"accessor":"station_name","name":"station_name","type":"character"}],"defaultPageSize":5,"paginationType":"numbers","showPageInfo":true,"minRows":1,"dataKey":"fbcd6416fd69f8f4a81fdea56a69b623","key":"fbcd6416fd69f8f4a81fdea56a69b623"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+</div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

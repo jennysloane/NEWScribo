@@ -10,30 +10,22 @@ As we mentioned in the first workshop, you will work on a research project in sm
 
 # The Olympics Data
 ```{r Olympics}
-#install.packages("tidyverse")
-#install.packages("tidytuesdayR")
+# install.packages("tidyverse")
  
-library(tidytuesdayR) # we need this package to read in our data
+library(tidyverse) # we need this package to read in our data
 
-tt_olympics <- tidytuesdayR::tt_load('2021-07-27') # the is the week that the Olympic data set was used.
-# this loads in the data we want. tt = tidytuesday
+olympics <- read_csv("olympics.csv") # read in the olympics data
 
-olympics <- tt_olympics$olympics 
-
-reactable::reactable(head(olympics, 20), defaultPageSize=5) # view top 20 rows
+reactable::reactable(head(olympics, 20), defaultPageSize=5) # create table to view top 20 rows
 ```
 
 # Australia Rainfall Data
 ```{r Rainfall}
-#install.packages("tidyverse")
-#install.packages("tidytuesdayR")
+# install.packages("tidyverse")
  
-library(tidytuesdayR) # we need this package to read in our data
+library(tidyverse) # we need this package to read in our data
 
-tt_rainfall <- tidytuesdayR::tt_load('2020-01-07')  # the is the week that the Olympic data set was used
-# this loads in the data we want. tt = tidytuesday
+rainfall <- read_csv("rainfall.csv") # read in the rainfall data
 
-rainfall <- tt_rainfall$rainfall
-
-reactable::reactable(head(rainfall, 20), defaultPageSize=5) # view top 20 rows
+reactable::reactable(head(rainfall, 20), defaultPageSize=5) # create table to view top 20 rows
 ```

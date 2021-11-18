@@ -1,0 +1,88 @@
+---
+title: "Sample Project"
+description: |
+  This is a sample project using the Olympic dataset 
+author:
+  - name: Jenny Sloane
+date: 2021-11-18
+output:
+  distill::distill_article:
+    self_contained: false
+---
+<!-- have to knit before build -->
+<!-- need space before and after R chunks -->
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+# Load libraries
+```{r message=FALSE, warning=FALSE}
+library(tidyverse)
+library(palmerpenguins) # has penguin data
+library(ggeasy) # has "helper" functions to use with ggplot
+```
+
+# Read in data
+
+- read in data using `read_csv()`
+- save data to a variable named `olympics`
+
+```{r}
+olympic_data <- read_csv("olympics.csv")
+``` 
+
+# Preview the data 
+
+```{r}
+head(olympic_data)
+```
+
+# Research question: 
+
+**Which national Olympic committees (top 10) won the most medals?**
+
+# Clean and organize our data using Tidyverse
+
+*note noc = national Olympic committee*
+
+```{r}
+olympics_top10 <- olympic_data %>% # create a new variable with our results
+  select(noc, medal) %>% # step 1
+  na.omit() %>% # step 2
+  group_by(noc) %>% # step 3
+  count(name = "medal_count") %>% # step 4
+  arrange(desc(medal_count)) %>% # step 5
+  head(10) # step 6
+```
+
+- Step 1: select only the variables that we need in order to answer our research question (this will make working with the data much easier) 
+- Step 2: I noticed there were a lot of "NAs" or missing data, so na.omit() removes all the missing data
+- Step 3: group by the noc variable
+- Step 4: get a total count of the number of medals for each noc
+- Step 5: now we have a row for each noc and a count of how many records they won, so in order to see who won the most medals we'll arrange our data in descending order so the country with the most medals will be first and the country with the fewest medals will be last
+- Step 6: finally, we'll use the `head()` to select the top 10 rows which gives us the top 10 nocs with the most medals!
+
+# See the results!
+
+- Here are the 10 national olympic committees with the most recorded medals
+
+```{r}
+olympics_top10
+```
+
+# Visualise the results!
+
+```{r}
+# I've reordered the columns based on the sum of the total variable 
+ggplot(olympics_top10, aes(x = reorder(noc, medal_count, sum), y = medal_count, fill=noc)) + 
+  geom_col() + 
+  coord_flip() + # flips the cartesian coordinates to make it easier to read the country names
+  labs(x = "National Olympic Committee", y = "Total Medals") + # you can also add a "title" here if you'd like
+  theme_bw() + # there are several default themes but I like this one 
+  easy_remove_legend() + # one of my favorite functions from ggeasy to remove the legend
+  easy_text_size(15) # another one of my favorite functions from ggeasy to change the text size
+
+```
+

@@ -19,4 +19,8 @@ navbar:
           href: workshop1.html
         - text: "Workshop 2"
           href: workshop2.html 
+        - text: "Workshop 3"
+          href: workshop3.html
+        - text: "Workshop 4"
+          href: workshop4.html  
 output: distill::distill_article

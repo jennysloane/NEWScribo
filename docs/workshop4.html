@@ -87,26 +87,26 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 
   <!--radix_placeholder_meta_tags-->
-  <title>NEWScribo: Workshop 2: R Syntax and Packages</title>
+  <title>NEWScribo: Workshop 4: Research Question #3</title>
 
 
 
 
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-  <meta property="og:title" content="NEWScribo: Workshop 2: R Syntax and Packages"/>
+  <meta property="og:title" content="NEWScribo: Workshop 4: Research Question #3"/>
   <meta property="og:type" content="article"/>
   <meta property="og:locale" content="en_US"/>
   <meta property="og:site_name" content="NEWScribo"/>
 
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
-  <meta property="twitter:title" content="NEWScribo: Workshop 2: R Syntax and Packages"/>
+  <meta property="twitter:title" content="NEWScribo: Workshop 4: Research Question #3"/>
 
   <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title"]}},"value":[{"type":"character","attributes":{},"value":["Workshop 2: R Syntax and Packages"]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title"]}},"value":[{"type":"character","attributes":{},"value":["Workshop 4: Research Question #3"]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   <!--radix_placeholder_navigation_in_header-->
@@ -2417,7 +2417,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Workshop 2: R Syntax and Packages","authors":[]}
+{"title":"Workshop 4: Research Question #3","authors":[]}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2454,7 +2454,7 @@ Materials
 <!--/radix_placeholder_site_before_body-->
 
 <div class="d-title">
-<h1>Workshop 2: R Syntax and Packages</h1>
+<h1>Workshop 4: Research Question #3</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
 
@@ -2462,128 +2462,59 @@ Materials
 
 
 <div class="d-article">
-<p>In this workshop, we learned about the syntax of R, including several common operators, vectors, and different types of variables. We also briefly introduced Tidyverse and discussed packages and how to install and load (or call) in the libraries for the packages you want to use.</p>
-<p>Before we get started, here are the instructions if you want to change your R Markdown preferences to print your code in the console as opposed to directly below the R chunk: <br> <em>Tools -&gt; Global Options -&gt; R Markdown -&gt; uncheck where is says “show output inline for all…”</em></p>
-<h1 id="syntax">Syntax</h1>
-<p>Syntax in computer programming is a set of rules that defines the structure of a language, similar to how we have rules for grammar and spelling. If you write a sentence with incorrect spelling or grammar, the sentence may not make sense. If you write code without proper syntax, the code won’t be able to run and you’ll get an error message.</p>
-<h2 id="operators">Operators</h2>
+<p>In this workshop, we first reviewed the code for Research Question #1 and discussed the importance of “commenting” our code (aka leaving notes for ourselves in the future). Although we didn’t have time to go through the code for Research Question #2, you can find the code in the workshop2_answers.Rmd on RStudio cloud.</p>
+<p>We spent the majority of our time working through Research Question #3: Is there a relationship between height and weight for basketball players (both male and female)? With this research question, we talked about the concept of a correlation.</p>
+<p>We spent the remaining time working in your groups to discuss ideas for your own research question.</p>
+<h1 id="load-libraries">Load libraries</h1>
+<p>As always, the first thing we need to do is load in the libraries (or packages) we want to use</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fl'>10</span> <span class='co'># assignment operator</span>
-<span class='va'>y</span> <span class='op'>&lt;-</span> <span class='fl'>25</span>
-<span class='va'>z</span> <span class='op'>&lt;-</span> <span class='fl'>100</span>
-
-<span class='va'>x</span> <span class='op'>&gt;</span> <span class='va'>y</span> <span class='co'># greater than operator: 10 &gt; 25?</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span>
 </code></pre>
 </div>
-<pre><code>[1] FALSE</code></pre>
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>x</span> <span class='op'>&lt;</span> <span class='va'>y</span>  <span class='co'># less than operator</span>
-</code></pre>
 </div>
-<pre><code>[1] TRUE</code></pre>
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># x = y</span>
-<span class='va'>x</span> <span class='op'>==</span> <span class='va'>y</span> <span class='co'># equality operator</span>
-</code></pre>
-</div>
-<pre><code>[1] FALSE</code></pre>
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>x</span> <span class='op'>!=</span> <span class='va'>y</span> <span class='co'># not equal to operator </span>
-</code></pre>
-</div>
-<pre><code>[1] TRUE</code></pre>
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>z</span> <span class='op'>&gt;</span> <span class='fl'>50</span> <span class='op'>&amp;</span> <span class='va'>z</span> <span class='op'>&lt;</span> <span class='fl'>200</span> <span class='co'># &amp; is the "and" operator</span>
-</code></pre>
-</div>
-<pre><code>[1] TRUE</code></pre>
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>z</span> <span class='op'>&gt;</span> <span class='fl'>50</span> <span class='op'>&amp;</span> <span class='va'>z</span> <span class='op'>&gt;</span> <span class='fl'>200</span>
-</code></pre>
-</div>
-<pre><code>[1] FALSE</code></pre>
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>z</span> <span class='op'>&gt;</span> <span class='fl'>50</span> <span class='op'>|</span> <span class='va'>z</span> <span class='op'>&gt;</span> <span class='fl'>200</span> <span class='co'># | is the "or" operator</span>
-</code></pre>
-</div>
-<pre><code>[1] TRUE</code></pre>
-</div>
-<h2 id="vectors">Vectors</h2>
-<ul>
-<li>In R, a vector is the simplest type of data structure. It is “a single entity consisting of a collection of things”</li>
-</ul>
+<h1 id="read-in-data">Read in data</h1>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>names</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Kevin"</span>, <span class='st'>"Jenny"</span>, <span class='st'>"Millie"</span><span class='op'>)</span>
-
-<span class='va'>age</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>20</span>, <span class='fl'>18</span>, <span class='fl'>33</span><span class='op'>)</span>
-
-<span class='va'>blue_eyes</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='cn'>TRUE</span>, <span class='cn'>FALSE</span>, <span class='cn'>FALSE</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>olympics</span> <span class='op'>&lt;-</span> <span class='fu'>read_csv</span><span class='op'>(</span><span class='st'>"olympics.csv"</span><span class='op'>)</span>
+<span class='va'>olympics</span>
 </code></pre>
 </div>
+<pre><code># A tibble: 271,116 x 15
+      id name      sex     age height weight team   noc   games   year
+   &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;  &lt;dbl&gt;
+ 1     1 A Dijiang M        24    180     80 China  CHN   1992 ~  1992
+ 2     2 A Lamusi  M        23    170     60 China  CHN   2012 ~  2012
+ 3     3 Gunnar N~ M        24     NA     NA Denma~ DEN   1920 ~  1920
+ 4     4 Edgar Li~ M        34     NA     NA Denma~ DEN   1900 ~  1900
+ 5     5 Christin~ F        21    185     82 Nethe~ NED   1988 ~  1988
+ 6     5 Christin~ F        21    185     82 Nethe~ NED   1988 ~  1988
+ 7     5 Christin~ F        25    185     82 Nethe~ NED   1992 ~  1992
+ 8     5 Christin~ F        25    185     82 Nethe~ NED   1992 ~  1992
+ 9     5 Christin~ F        27    185     82 Nethe~ NED   1994 ~  1994
+10     5 Christin~ F        27    185     82 Nethe~ NED   1994 ~  1994
+# ... with 271,106 more rows, and 5 more variables: season &lt;chr&gt;,
+#   city &lt;chr&gt;, sport &lt;chr&gt;, event &lt;chr&gt;, medal &lt;chr&gt;</code></pre>
 </div>
-<h2 id="types-of-variables">Types of Variables</h2>
-<p><img src="data_types.png" /></p>
+<h1 id="research-question-3">Research Question 3</h1>
+<p>Is there a relationship between height and weight for basketball players (both male and female)?</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/typeof.html'>typeof</a></span><span class='op'>(</span><span class='va'>names</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>olympics</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>select</span><span class='op'>(</span><span class='va'>sex</span>, <span class='va'>height</span>, <span class='va'>weight</span>, <span class='va'>sport</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/stats/na.fail.html'>na.omit</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>sport</span> <span class='op'>==</span> <span class='st'>"Basketball"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>group_by</span><span class='op'>(</span><span class='va'>sex</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>summarise</span><span class='op'>(</span>correlation <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>cor</a></span><span class='op'>(</span><span class='va'>height</span>, <span class='va'>weight</span><span class='op'>)</span><span class='op'>)</span> 
 </code></pre>
 </div>
-<pre><code>[1] &quot;character&quot;</code></pre>
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/typeof.html'>typeof</a></span><span class='op'>(</span><span class='va'>age</span><span class='op'>)</span>
-</code></pre>
+<pre><code># A tibble: 2 x 2
+  sex   correlation
+  &lt;chr&gt;       &lt;dbl&gt;
+1 F           0.796
+2 M           0.831</code></pre>
 </div>
-<pre><code>[1] &quot;double&quot;</code></pre>
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/typeof.html'>typeof</a></span><span class='op'>(</span><span class='va'>blue_eyes</span><span class='op'>)</span>
-</code></pre>
-</div>
-<pre><code>[1] &quot;logical&quot;</code></pre>
-</div>
-<h1 id="tidyverse">Tidyverse</h1>
-<ul>
-<li>Tidyverse is a package, well it’s actually a collection of 8 packages (ggplot2, dplyr, tidyr, readr, purrr, tibble, stringr, forcats) introduced by Hadley Wickham to help with data manipulation, exploration, and visualisation
-<ul>
-<li>You can check out the tidyverse <a href="https://www.tidyverse.org/packages/" class="uri">https://www.tidyverse.org/packages/</a> to find out more details of each of the individual packages</li>
-</ul></li>
-</ul>
-<h1 id="packages">Packages</h1>
-<ul>
-<li><p>Remember, a package is a collections of code, data, and documentation all bundled together in a standardized way that can be easily shared and installed by other R users</p></li>
-<li><p><strong>Installing packages</strong>: when you want to use a package for the first time, you must install the package with <code>install.packages("package_name")</code> - note the package name must be in quotes. You only need to install a package 1 time on your local computer, so I suggest using the console to install packages</p></li>
-<li><p><strong>Loading packages/libraries</strong>: every time you start a new session, you have to tell R what packages you want to load in. You do this with the <code>library(package_name)</code> - note the package name does not need to be in quotes here</p></li>
-<li><p>Whenever you load tidyverse, you will see a message saying it’s attaching all 8 packages. Therefore, you don’t have to load in any of the individual packages because they all get called in together. This means as long as you load in tidyverse, you can use functions from any one of the 8 packages</p></li>
-</ul>
-<p>We will use the <code>tidyverse</code> and <code>palmerpenguins</code> packages</p>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># install.packages("tidyverse") # run in console</span>
-<span class='co'># install.packages("palmerpenguins")</span>
-
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://allisonhorst.github.io/palmerpenguins/'>palmerpenguins</a></span><span class='op'>)</span>
-<span class='va'>penguins</span>
-</code></pre>
-</div>
-<pre><code># A tibble: 344 x 8
-   species island    bill_length_mm bill_depth_mm flipper_length_mm
-   &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;
- 1 Adelie  Torgersen           39.1          18.7               181
- 2 Adelie  Torgersen           39.5          17.4               186
- 3 Adelie  Torgersen           40.3          18                 195
- 4 Adelie  Torgersen           NA            NA                  NA
- 5 Adelie  Torgersen           36.7          19.3               193
- 6 Adelie  Torgersen           39.3          20.6               190
- 7 Adelie  Torgersen           38.9          17.8               181
- 8 Adelie  Torgersen           39.2          19.6               195
- 9 Adelie  Torgersen           34.1          18.1               193
-10 Adelie  Torgersen           42            20.2               190
-# ... with 334 more rows, and 3 more variables: body_mass_g &lt;int&gt;,
-#   sex &lt;fct&gt;, year &lt;int&gt;</code></pre>
-</div>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

@@ -1,0 +1,111 @@
+---
+title: "Workshop 3: Data Frames and Data Manipulation"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE)
+```
+
+
+In this workshop, we first learned about dataframes and tibbles and then discussed data manipulation. We introduced the pipe `%>%` operator and went through the first research question using the olympics dataset: How many gold medals has Australia won each year we have recorded?
+
+- Although we won't have time to go through all of the functions you may need, but here's a cheat sheet with some of the more popular functions <https://docs.google.com/document/d/1zEP36GwV3XfPI3FB9b64ckRLkZTkYs27jX7eBzFHvNQ/edit>
+
+# Load libraries
+
+As always, the first thing we need to do is load in the libraries (or packages) we want to use
+
+```{r}
+library(tidyverse)
+library(palmerpenguins)
+```
+
+
+# Data frames
+
+- what is a data frame?
+  - a data frame is a common way of storing data in R. Data frames can have variables are different types (e.g. one variable may be a character and one may be numeric)
+- here, we will explore the penguins dataset that is included in the palmerpenguins package, so once you load the library you can take a look at `penguins`
+- how can we interpret this data?
+  - each row is a unique penguin
+  - each column is a variable that provides information about the penguin 
+- we can see this is a data frame and it actually tells us penguins is specifically a "tibble"
+- tibbles are simple data frames with some features that make working with the data really nice
+  - shows us exactly how big our dataset is (344 rows and 8 columns)
+  - automatically only prints out the first 10 rows, so we can always see the variable names at the top
+  - under each variable name, we see what type of variable it is (i.e. fct, dbl, int)
+
+```{r}
+penguins
+
+is.data.frame(penguins)
+is_tibble(penguins)
+
+is.data.frame(names)
+```
+
+## Create our own tibble
+
+- let's combine the vectors we created in the previous workshop into a tibble using `tibble()`
+
+```{r}
+names <- c("Kevin", "Jenny", "Millie")
+age <- c(20, 18, 33)
+blue_eyes <- c(TRUE, FALSE, FALSE)
+
+my_tibble <- tibble(
+  Name = names,
+  Age = age,
+  Blue_eye = blue_eyes
+)
+
+is.data.frame(my_tibble)
+is_tibble(my_tibble)
+
+my_tibble$Name[1]
+
+my_tibble[1,3]
+
+
+```
+
+# Data Manipulation
+
+## Read in data
+
+```{r}
+olympics <- read_csv("olympics.csv")
+olympics
+```
+
+## What is your research question?
+
+How many gold medals has Australia won each year we have recorded?
+
+## The pipe %>% operator
+
+- the pipe is part of the tidyverse language and we will use it all the time!
+- you use the pipe when you want to execute multiple operations in a specific sequence. To me, it makes sense to think about the pipe as "AND THEN"
+
+## Research Question #1
+
+How many gold medals has Australia won each year we have recorded?
+
+```{r}
+my_olympics <- olympics %>% 
+  select(noc, year, medal) %>% 
+  filter(noc == "AUS") %>% 
+  filter(medal == "Gold") %>% 
+  na.omit()
+
+my_olympics %>% 
+  count(medal) 
+
+my_olympics %>% 
+  group_by(year) %>% 
+  count(medal) %>% # medals *for each year* because we used group_by()
+  arrange(desc(n))
+
+```
+
+

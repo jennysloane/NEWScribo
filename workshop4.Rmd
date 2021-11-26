@@ -1,0 +1,42 @@
+---
+title: "Workshop 4: Research Question #3"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE)
+```
+
+In this workshop, we first reviewed the code for Research Question #1 and discussed the importance of "commenting" our code (aka leaving notes for ourselves in the future). Although we didn't have time to go through the code for Research Question #2, you can find the code in the workshop2_answers.Rmd on RStudio cloud. 
+
+We spent the majority of our time working through Research Question #3: Is there a relationship between height and weight for basketball players (both male and female)? With this research question, we talked about the concept of a correlation. 
+
+We spent the remaining time working in your groups to discuss ideas for your own research question. 
+
+# Load libraries
+
+As always, the first thing we need to do is load in the libraries (or packages) we want to use
+
+```{r}
+library(tidyverse)
+```
+
+# Read in data
+
+```{r}
+olympics <- read_csv("olympics.csv")
+olympics
+```
+
+
+# Research Question 3
+
+Is there a relationship between height and weight for basketball players (both male and female)?
+
+```{r}
+olympics %>%
+  select(sex, height, weight, sport) %>%
+  na.omit() %>%
+  filter(sport == "Basketball") %>%
+  group_by(sex) %>%
+  summarise(correlation = cor(height, weight)) 
+```

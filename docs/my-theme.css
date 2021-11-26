@@ -46,7 +46,7 @@ d-byline {
 /*-- ARTICLE TABLE OF CONTENTS --*/
 .d-contents {
   --heading-size:    18px;
-  --contents-size:   18px;
+  --contents-size:   16px;
 }
 
 /*-- ARTICLE APPENDIX --*/
@@ -83,13 +83,20 @@ a {
 color: #8980F5;
 }
 
-/*Change header colors*/
-h1, h2 {
+/*Change header colors and size*/
+h1 {
   color: #2d6a4f;
+  font-size: 34px;
+}
+
+h2 {
+  color: #2d6a4f;
+  font-size: 30px;
 }
 
 h3 {
   color: #9C6B9C;
+  font-size: 28px;
 }
 
 /*change body color*/

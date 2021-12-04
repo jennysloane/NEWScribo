@@ -1,0 +1,128 @@
+---
+title: "Is there a correlation between age and performance for olympic players over different sports?"
+# description: |
+#   A short description of the post.
+author:
+  - name: Hugo Kilborn, Freddie Bolton, Benjamin MacDessi
+    url: {}
+date: 2021-12-04
+output:
+  distill::distill_article:
+    self_contained: false
+---
+<!-- have to knit before build -->
+<!-- need space before and after R chunks -->
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
+# Project Description
+
+We were interested in the olympic dataset because it had a lot of diversity among the different sports. 
+
+**Research Question: Is there a correlation between age and performance for olympic players over different sports?**
+
+- We believe that for some sports, such as swimming,  will have more young medal winners, whereas other sports, such as Equestrian, will have older medal recipients. 
+
+# Load libraries 
+
+- Libraries are used to simplify the coding process by adding different commands, such as the pipe command, which allows you to do many commands in the same chunk of code* 
+
+```{r}
+library(tidyverse)
+library(ggeasy) # has "helper" functions to use with ggplot
+library(ggpubr)
+```
+
+# Read in data
+
+- Read in data using `read_csv()`
+- Save data to a variable named `olympics`
+
+```{r}
+olympic_data <- read_csv("olympics.csv")
+```
+
+# Preview the data 
+
+- Here, we see a preview of the Olympic dataset. The data is what we call a tibble, which is a simple data frame that is convenient to work with. For example, we see the first 10 rows of data and we also can see the different variables along with the variable types.
+- For our research question, we are specifically interested in the `age`, and `medal` variables. We are also interested in the `sport` variable because we want to know if different sports are more suited to younger people or older people
+
+
+```{r}
+olympic_data
+```
+
+# Clean the data
+
+- We created a mini dataset that has only the variables and rows that you need to answer your research question. We then saved this to a new variable
+- So, here you'll want to use the select and filter functions to keep only the variables you want
+- NAs, meaning not applicable, need to be removed, because this is where data has not been filled in, therefore you don't want this in your mini dataset
+
+- Step 1: We first filter the olympic_data set into what we will now write, olympic_box.
+- Step 2: We use the select function to only include these types of information in our set.
+- Step 3: We use filter twice to only use medal winners and only use the 4 sports we will be studying.
+- Step 4: Next we use the mutate function to add new information, in forms of numbers, from already held information.
+- Step 5: Finally we use the na.omit() function to delete and non-usable data points, as in “not applicable”
+
+```{r}
+olympic_box <- olympic_data %>%
+  select(age, medal, noc, sport) %>%
+  filter(medal %in% c("Gold", "Silver", "Bronze")) %>%
+  filter(sport %in% c("Basketball", "Gymnastics", "Swimming", "Equestrianism")) %>%
+  mutate(MedalNumeric = recode(medal, "Gold" = 1, "Silver" = 2, "Bronze" = 3)) %>%
+  na.omit()
+
+olympic_box$medal = factor(olympic_box$medal, levels = c("Gold", "Silver", "Bronze"))
+
+olympic_box
+```
+
+# Summary statistics
+
+- Because we are interested in the age of medal winners, it would be useful to know the youngest medal winner and the oldest medal winner. It would also be useful to know the average age of medal winners.
+
+
+```{r}
+range(olympic_box$age) # this function gives us both the min and max
+
+mean(olympic_box$age) # Some outliers shift this number. 
+# In the plot later on, the outliers are visible as dots outside of the box and lines.
+
+median(olympic_box$age) 
+
+olympic_box %>%
+  count(medal) # counts the number of medals
+```
+
+# Answering the Reasearch Question
+
+- We can see from the data that the equestrianists were the oldest medal winners on average. We can also see that the youngest medal winner was 10, the oldest medal winner was 61, and the average age of medal winners was 24 years old.
+
+
+```{r}
+olympic_box %>%
+  group_by(sport) %>%
+  summarise(correlation = cor(MedalNumeric, age)) 
+#It was surprising that the correlation of the sport and age factors weren't that correct
+```
+
+# Visualise the results!
+
+- The data on the x axis is what medal the athlete got. The data on the y axis is the age of the athlete
+- In this code, the first thing we was format the plot with it's x and y axis. You can also see the reorder function that ordered the medal and age functions. The next few lines worked out the ordering of the graph. Then after that the code changes the labels, colour of the bars, the text size and the theme 
+
+
+```{r}
+ggplot(olympic_box, aes(x = reorder(medal, age), y = age, color = medal)) +
+  geom_boxplot() +
+  facet_wrap(~sport) +
+  theme_bw() +
+  labs(x = "Medal", 
+       y = "Age of Olympic Players") +
+  scale_colour_manual(values = c("#FFD700","#C0C0C0","#CD7F32"))+
+  easy_text_size(15) 
+```
+
+

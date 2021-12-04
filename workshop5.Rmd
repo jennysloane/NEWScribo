@@ -1,0 +1,189 @@
+---
+title: "Workshop 5: Data Visualisation and Example Final Project"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE)
+```
+
+In this workshop, we learned about using `ggplot()` to make beautiful graphs in R. We specifically learned about the different kinds of variables (continuous vs. categorical) and how to decide which type of graph (scatter plot, blox plot, bar plot, or line graph) would be most appropriate. 
+
+We created a "final project" template which we went through together using an example research question. This template serves as a guide for what the final projects will look like. 
+
+
+# Project Description
+
+In this example project, Tehilla and Jenny will go through Research Question #3 from the previous workshop. We both enjoy sports and thought the Olympic dataset looked interesting, which is why we chose this dataset to work with. Our research question is:
+
+**Is there a relationship between height and weight for basketball players (both male and female)?**
+
+We predict that there will be a positive relationship between height and weight because people who are taller tend to weigh more. 
+
+# Load libraries 
+
+```{r}
+library(tidyverse)
+library(ggeasy) # has "helper" functions to use with ggplot
+library(ggpubr)
+```
+
+# Read in data
+
+- read in data using `read_csv()`
+- save data to a variable named `olympics`
+
+```{r}
+olympic_data <- read_csv("olympics.csv")
+```
+
+# Preview the data 
+
+Here, we see a preview of the Olympic dataset. The data is what we call a tibble, which is a simple data frame that is convenient to work with. For example, we see the first 10 rows of data and we also can see the different variables along with the variable types.
+
+For our research question, we are specifically interested in the `height` and `weight` variables. We are also interested in the `sex` variable because we want to see if there's a relationship between height and weight for both males and females and the `sport` variable because we just want data for basketball players.
+
+```{r}
+olympic_data
+```
+
+# Clean the data
+
+Here, we are creating a mini dataset with just the variables and rows that we are interested in for our research question. This mini dataset will be much easier for us to use for our analyses. 
+
+- Step 1: We begin by starting with the olympic_data set
+- Step 2: then, we select only the 4 variables of interest
+- Step 3: then, we filter the rows to only include the basketball players
+- Step 4: then, we use the `na.omit()` function to remove missing data (make sure to explain what NAs are)
+
+```{r}
+olympic_clean <- olympic_data %>% # Step 1
+  select(sex, height, weight, sport) %>% # Step 2
+  filter(sport == "Basketball") %>% # Step 3
+  na.omit() # Step 4
+
+olympic_clean
+```
+
+# Summary statistics
+
+Because we are interested in the heights of basketball players, it would be useful to know the minimum height (shortest player) and the maximum height (tallest player) to get a sense of the range of heights. It is also helpful to know the overall average height of all the players. We could do the same for the players weights. Finally, we use the `count()` function to tally the total number of females and males in our dataset. 
+
+```{r}
+range(olympic_clean$height) # this function gives us both the min and max
+
+mean(olympic_clean$height)
+
+# median(olympic_clean$weight) 
+
+olympic_clean %>%
+  count(sex) # counts the number of females and males 
+```
+
+# Answer your research question
+
+We are interested in getting the correlation between height and weight for both females and males. Therefore, we first need to group by sex and then we can summarise our data using the `cor()` function that gives us the correlation (a number between -1 and 1, which -1 is a perfect negative correlation and +1 is a perfect positive correlation).
+
+Our results show females have a strong, positive correlation of 0.796 and males also have a strong, positive correlation of 0.831. This means that as height increases, weight also increases.
+
+```{r}
+olympic_clean %>%
+  group_by(sex) %>%
+  summarise(correlation = cor(height, weight))
+```
+
+# Visualise the results!
+
+On the x axis, we will plot the height of the basketball players, which is a continuous variable.
+
+On the y axis, we will plot the weight of the basketball players, which is also a continuous variable. 
+
+Because we have 2 continuous variables, we will create a scatter plot. 
+
+## example of scatter plot
+
+```{r}
+ggplot(olympic_clean, aes(x = height, y = weight, color = sex)) +
+  geom_point(alpha=.2) +
+  geom_smooth(method = "lm") +
+  theme_bw() +
+  labs(x = "Height of Basketball Players", 
+       y = "Weight of Basektball Players") +
+  easy_text_size(15) +
+  stat_cor()
+```
+
+## example of box plot
+
+- now let's imagine our research question was: "is there a relationship between sport (swimming, basketball, and wrestling) and height of Olympic players?"
+- here, we have height which is continuous and sport which is categorical, so we will create a box plot (note we will use the olympic_data here)
+
+```{r}
+olympic_box <- olympic_data %>%
+  select(height, sport) %>%
+  filter(sport %in% c("Swimming", "Basketball", "Wrestling")) %>%
+  na.omit()
+
+ggplot(olympic_box, aes(x = sport, y = height, color = sport)) +
+  geom_boxplot() +
+  theme_bw() +
+  labs(x = "Sport", 
+       y = "Height of Olympic Players") +
+  easy_text_size(15) 
+```
+
+## example of bar plot
+
+- research question: "How many gold, silver, and bronze medals have AUS, ITA, RUS, and USA won in the years 2000 and 2016?"
+- here we have country which is a categorical variable and medals which is also a categorical variable
+
+```{r}
+olympic_bar <- olympic_data %>%
+  select(noc, medal, year) %>%
+  na.omit() %>%
+  filter(year %in% c(2000, 2016)) %>%
+  filter(noc %in% c("AUS", "USA", "ITA", "RUS"))
+
+# medal was originally a character string, but we want it as a factor (which is a categorical variable)
+# we also want the medals to be in this order: Gold, Silver, Bronze so we can reset the levels here
+olympic_bar$medal <- factor(olympic_bar$medal, levels = c("Gold", "Silver", "Bronze"))
+
+ggplot(olympic_bar, aes(x = noc, fill=medal)) +
+  geom_bar() +
+  theme_bw() +
+  facet_wrap(~year) +
+  labs(x = "Country", 
+       y = "Number of Medals") +
+  scale_fill_manual(values = c("#FFD700", "#C0C0C0", "#CD7F32")) +
+  easy_text_size(15) +
+  easy_remove_legend_title()
+```
+
+## example of line graph
+- A line graph is useful when our data deals with 2 continuous variables that we wish to present for subgroups in our data.  
+
+- research question: "How did rainfall change across the each month (continuous variable 2) in the years 2019-2020 for Adelaide and Sydney separately (cities are the groups) ?"
+- here we have rainfall as a continuous variable (#1) and month which is also a continuous variable (#2) and city (Adelaide & Sydney) as a way to group our data. 
+
+```{r}
+rain_data <- read_csv("rainfall.csv") 
+
+# city_name was originally a character string, but we want it as a factor. The as.factor() function categorizes those into factors. 
+rain_data$city_name = as.factor(rain_data$city_name)
+             
+rain_data_clean <- rain_data %>%
+  select(city_name, month, rainfall, year) %>%# Step 1
+  filter(city_name == "Adelaide" | city_name == "Sydney") %>% # Step 2
+  filter(year == "2019" | year == "2020") %>% # Step 2. I chose the last 2 recorded years since for 2020 there was only data for Adelaide
+  na.omit() %>% # Step 3
+  group_by(city_name, month) %>% # Here I group the data by the cities and by month
+  summarise(average_monthly_rain = mean(rainfall)) # calculate the mean of each month for each city
+
+ggplot(rain_data_clean, aes(x = month, y = average_monthly_rain, group = city_name, color = city_name)) +
+  geom_point() +
+  geom_line() +
+  theme_bw() +
+  scale_color_manual(values = c("#0099CC", "#339999")) +
+  easy_text_size(15) +
+  labs(x = " Month (2019-2020)", y = "Average Monthly Rainfall (mm)")+
+  easy_remove_legend_title()
+```

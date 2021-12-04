@@ -2434,7 +2434,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <a href="projects.html">Projects</a>
 <div class="nav-dropdown">
 <button class="nav-dropbtn">
-Materials
+Workshop Materials
  
 <span class="down-arrow">&#x25BE;</span>
 </button>
@@ -2443,6 +2443,7 @@ Materials
 <a href="workshop2.html">Workshop 2</a>
 <a href="workshop3.html">Workshop 3</a>
 <a href="workshop4.html">Workshop 4</a>
+<a href="workshop5.html">Workshop 5</a>
 </div>
 </div>
 <a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
@@ -2467,18 +2468,22 @@ Materials
 <h1 id="schedule---coded-in-r">Schedule - coded in R!</h1>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>Workshop</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>Workshop</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>7</span><span class='op'>)</span>
 
 <span class='va'>Date</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"November 1st"</span>, 
           <span class='st'>"November 15th"</span>, 
-          <span class='st'>"November 22nd"</span>, 
-          <span class='st'>"November 29th"</span>, 
-          <span class='st'>"Week of December 6th"</span><span class='op'>)</span>
+          <span class='st'>"November 22nd"</span>,
+          <span class='st'>"November 24th"</span>,
+          <span class='st'>"December 1st"</span>, 
+          <span class='st'>"December 3rd"</span>, 
+          <span class='st'>"December 6th"</span><span class='op'>)</span>
 
 <span class='va'>Topic</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Intro to Programming and R"</span>, 
-           <span class='st'>"Data Manipulation and Wrangling"</span>, 
-           <span class='st'>"QnA Session"</span>, 
+           <span class='st'>"Data Manipulation and Wrangling: Part 1"</span>, 
+           <span class='st'>"Data Manipulation and Wrangling: Part 2"</span>, 
+           <span class='st'>"Data Manipulation and Wrangling: Part 3"</span>, 
            <span class='st'>"Data Visualisation"</span>, 
+           <span class='st'>"Final Projects"</span>, 
            <span class='st'>"Showcase!!"</span><span class='op'>)</span>
 
 <span class='va'>schedule</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span><span class='va'>Workshop</span>, <span class='va'>Date</span>, <span class='va'>Topic</span><span class='op'>)</span>
@@ -2487,12 +2492,12 @@ Materials
   <span class='fu'>gt</span><span class='fu'>::</span><span class='fu'><a href='https://gt.rstudio.com/reference/gt.html'>gt</a></span><span class='op'>(</span><span class='op'>)</span>
 </code></pre>
 </div>
-<div id="msnowotais" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="oiurxdhxtt" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#msnowotais .gt_table {
+#oiurxdhxtt .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -2517,7 +2522,7 @@ Materials
   border-left-color: #D3D3D3;
 }
 
-#msnowotais .gt_heading {
+#oiurxdhxtt .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2529,7 +2534,7 @@ Materials
   border-right-color: #D3D3D3;
 }
 
-#msnowotais .gt_title {
+#oiurxdhxtt .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2539,7 +2544,7 @@ Materials
   border-bottom-width: 0;
 }
 
-#msnowotais .gt_subtitle {
+#oiurxdhxtt .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2549,13 +2554,13 @@ Materials
   border-top-width: 0;
 }
 
-#msnowotais .gt_bottom_border {
+#oiurxdhxtt .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#msnowotais .gt_col_headings {
+#oiurxdhxtt .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2570,7 +2575,7 @@ Materials
   border-right-color: #D3D3D3;
 }
 
-#msnowotais .gt_col_heading {
+#oiurxdhxtt .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2590,7 +2595,7 @@ Materials
   overflow-x: hidden;
 }
 
-#msnowotais .gt_column_spanner_outer {
+#oiurxdhxtt .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2602,15 +2607,15 @@ Materials
   padding-right: 4px;
 }
 
-#msnowotais .gt_column_spanner_outer:first-child {
+#oiurxdhxtt .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#msnowotais .gt_column_spanner_outer:last-child {
+#oiurxdhxtt .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#msnowotais .gt_column_spanner {
+#oiurxdhxtt .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2622,7 +2627,7 @@ Materials
   width: 100%;
 }
 
-#msnowotais .gt_group_heading {
+#oiurxdhxtt .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2644,7 +2649,7 @@ Materials
   vertical-align: middle;
 }
 
-#msnowotais .gt_empty_group_heading {
+#oiurxdhxtt .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2659,15 +2664,15 @@ Materials
   vertical-align: middle;
 }
 
-#msnowotais .gt_from_md > :first-child {
+#oiurxdhxtt .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#msnowotais .gt_from_md > :last-child {
+#oiurxdhxtt .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#msnowotais .gt_row {
+#oiurxdhxtt .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2686,7 +2691,7 @@ Materials
   overflow-x: hidden;
 }
 
-#msnowotais .gt_stub {
+#oiurxdhxtt .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2698,7 +2703,7 @@ Materials
   padding-left: 12px;
 }
 
-#msnowotais .gt_summary_row {
+#oiurxdhxtt .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2708,7 +2713,7 @@ Materials
   padding-right: 5px;
 }
 
-#msnowotais .gt_first_summary_row {
+#oiurxdhxtt .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2718,7 +2723,7 @@ Materials
   border-top-color: #D3D3D3;
 }
 
-#msnowotais .gt_grand_summary_row {
+#oiurxdhxtt .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2728,7 +2733,7 @@ Materials
   padding-right: 5px;
 }
 
-#msnowotais .gt_first_grand_summary_row {
+#oiurxdhxtt .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2738,11 +2743,11 @@ Materials
   border-top-color: #D3D3D3;
 }
 
-#msnowotais .gt_striped {
+#oiurxdhxtt .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#msnowotais .gt_table_body {
+#oiurxdhxtt .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2751,7 +2756,7 @@ Materials
   border-bottom-color: #D3D3D3;
 }
 
-#msnowotais .gt_footnotes {
+#oiurxdhxtt .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2765,13 +2770,13 @@ Materials
   border-right-color: #D3D3D3;
 }
 
-#msnowotais .gt_footnote {
+#oiurxdhxtt .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#msnowotais .gt_sourcenotes {
+#oiurxdhxtt .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2785,41 +2790,41 @@ Materials
   border-right-color: #D3D3D3;
 }
 
-#msnowotais .gt_sourcenote {
+#oiurxdhxtt .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#msnowotais .gt_left {
+#oiurxdhxtt .gt_left {
   text-align: left;
 }
 
-#msnowotais .gt_center {
+#oiurxdhxtt .gt_center {
   text-align: center;
 }
 
-#msnowotais .gt_right {
+#oiurxdhxtt .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#msnowotais .gt_font_normal {
+#oiurxdhxtt .gt_font_normal {
   font-weight: normal;
 }
 
-#msnowotais .gt_font_bold {
+#oiurxdhxtt .gt_font_bold {
   font-weight: bold;
 }
 
-#msnowotais .gt_font_italic {
+#oiurxdhxtt .gt_font_italic {
   font-style: italic;
 }
 
-#msnowotais .gt_super {
+#oiurxdhxtt .gt_super {
   font-size: 65%;
 }
 
-#msnowotais .gt_footnote_marks {
+#oiurxdhxtt .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;
@@ -2840,15 +2845,21 @@ Materials
 <td class="gt_row gt_left">Intro to Programming and R</td></tr>
     <tr><td class="gt_row gt_right">2</td>
 <td class="gt_row gt_left">November 15th</td>
-<td class="gt_row gt_left">Data Manipulation and Wrangling</td></tr>
+<td class="gt_row gt_left">Data Manipulation and Wrangling: Part 1</td></tr>
     <tr><td class="gt_row gt_right">3</td>
 <td class="gt_row gt_left">November 22nd</td>
-<td class="gt_row gt_left">QnA Session</td></tr>
+<td class="gt_row gt_left">Data Manipulation and Wrangling: Part 2</td></tr>
     <tr><td class="gt_row gt_right">4</td>
-<td class="gt_row gt_left">November 29th</td>
-<td class="gt_row gt_left">Data Visualisation</td></tr>
+<td class="gt_row gt_left">November 24th</td>
+<td class="gt_row gt_left">Data Manipulation and Wrangling: Part 3</td></tr>
     <tr><td class="gt_row gt_right">5</td>
-<td class="gt_row gt_left">Week of December 6th</td>
+<td class="gt_row gt_left">December 1st</td>
+<td class="gt_row gt_left">Data Visualisation</td></tr>
+    <tr><td class="gt_row gt_right">6</td>
+<td class="gt_row gt_left">December 3rd</td>
+<td class="gt_row gt_left">Final Projects</td></tr>
+    <tr><td class="gt_row gt_right">7</td>
+<td class="gt_row gt_left">December 6th</td>
 <td class="gt_row gt_left">Showcase!!</td></tr>
   </tbody>
   

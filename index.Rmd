@@ -14,18 +14,22 @@ Over the next several weeks, we will introduce you to "R". R is a free, open sou
 
 # Schedule - coded in R!
 ```{r}
-Workshop <- c(1:5)
+Workshop <- c(1:7)
 
 Date <- c("November 1st", 
           "November 15th", 
-          "November 22nd", 
-          "November 29th", 
-          "Week of December 6th")
+          "November 22nd",
+          "November 24th",
+          "December 1st", 
+          "December 3rd", 
+          "December 6th")
 
 Topic <- c("Intro to Programming and R", 
-           "Data Manipulation and Wrangling", 
-           "QnA Session", 
+           "Data Manipulation and Wrangling: Part 1", 
+           "Data Manipulation and Wrangling: Part 2", 
+           "Data Manipulation and Wrangling: Part 3", 
            "Data Visualisation", 
+           "Final Projects", 
            "Showcase!!")
 
 schedule <- data.frame(Workshop, Date, Topic)

@@ -1,0 +1,138 @@
+---
+title: "Exploring the relationship between height and sport of Olympic athletes"
+# description: |
+#   What is the relationship between height of Olympic athletes and the sports they play?
+author:
+  - names: Alex Xu, Eamon Jia, Marcus Ke
+    url: {}
+date: 2021-12-03
+output:
+  distill::distill_article:
+    self_contained: false
+---
+<!-- have to knit before build -->
+<!-- need space before and after R chunks -->
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
+
+# Project Description
+
+We decided to use the Olympics dataset. Each member of our group has in depth experience in sport and thus this dataset has attracted our attention as something we all relate to and understand
+
+<!-- **What are the average heights of Basketball, Volleyball, Tennis, Gymnastics, and Football?** -->
+
+**Research Question: We are interested in exploring the relationship between height of Olympic players and the sport that they play. We will specifically look at basketball, volleyball, gymnastics, tennis and soccer.**
+
+- We predict that basketball players will have a greater height, due to the great advantage from height in the sport. 
+- We continue to show the changes in the average heights over time in the mentioned sports
+
+
+# Load libraries 
+
+- Libraries are pre-written chunks of R code that help us write our code. Here the tidyverse library helps you "tidy-up" the code. We also load the ggeasy, ggpubr and scales libraries.
+- There are lots of libraries written by other R users, for different purposes and users
+
+```{r}
+library(tidyverse)
+library(ggeasy)
+library(ggpubr)
+library(scales)
+```
+
+# Read in data
+
+- We can use the read_csv function (the tidyverse version of read.csv) to read in data from the csv file into R.
+
+```{r}
+olympics <- read_csv("olympics.csv")
+```
+
+# Preview the data 
+
+- We have chosen the olympics dataset which contains a massive tibble of the sports, the national olympics committees and various other statistics
+- In accordance to the question, the variables we are interested in are the height, and sport of the players. If time allows we may also attempt at the country that the players reside in
+- By typing out just the variable name we can see a tibble showing a preview of the data
+
+```{r}
+olympics
+```
+
+# Clean the data
+
+- We created a mini dataset that has only the variables (columns) and rows that we needed to answer our research question. We save this to a new variable
+- We use the filter and select functions to filter our individual columns and rows that we need to our research question
+- As opposed to the regular filter(XXX == "<sport>"), we utilised the %in% function to select multiple sports at once
+- We also use na.omit function to omit values that don't have data
+- We can preview the mini dataset
+- The %>% function is called the pipe function, which runs another line of code after the previous one
+
+```{r}
+olympic_clean <- olympics %>%
+  select(height, sport) %>%
+  filter(sport %in% c("Basketball", "Volleyball", "Gymnastics", "Football", "Tennis")) %>%
+  na.omit()
+
+olympic_clean
+```
+
+- However after this we can perceive that the sports have multiple heights because it gets all the heights from each sports rather than the mean
+- We can therefore return the mean (average) height of each player with an extra function as shown by the next section
+
+# Summary statistics
+
+```{r}
+olympic_heights <- olympic_clean %>%
+  group_by(sport) %>%
+  summarise(mean_height = round(mean(height), 2)) %>%
+  arrange(desc(mean_height))
+
+olympic_heights
+```
+
+# Visualise the results!
+
+- In our bar plot, we put the sport on the x axis (categorical data type), and we put the mean height on the y axis (continuous data type). We decided to use a bar chart to show this, because we are representing categorical and continuous data.
+- we use the ggplot function to plot our bar
+
+```{r}
+olympic_heights$sport <- factor(olympic_heights$sport)
+ggplot(olympic_heights, aes(x = fct_reorder(sport, desc(mean_height)), y = mean_height, fill = sport)) +
+  geom_bar(stat='identity') +
+  theme_bw() +
+  coord_cartesian(ylim=c(150,200)) +
+  labs(x = "Sport",
+       y = "Height(cm)") +
+  scale_fill_manual(values = c("#f5cec7", "#e79796", "#ffc98b", "#ffb284", "#c6c09c")) +
+  easy_remove_legend()
+
+```
+
+- Furthermore, we can show the alterations of mean heights of sports over time with this scatter plot.
+
+```{r}
+olympic_scatter <- olympics %>%
+  select(year, sport, height) %>%
+  filter(sport %in% c("Basketball", "Volleyball", "Gymnastics", "Football", "Tennis")) %>%
+  na.omit() %>%
+  group_by(sport, year) %>%
+  summarise(mean_height = round(mean(height), 2)) %>%
+  arrange(desc(mean_height))
+
+olympic_scatter
+ggplot(olympic_scatter, aes(x = year, y = mean_height, color = sport)) +
+  geom_point(alpha= .2) +
+  geom_smooth(method = 'lm') +
+  theme_bw() +
+  labs(x = "Year", 
+       y = "Mean Height")
+
+```
+
+# Summary
+
+- In conclusion we see that basketball has the highest mean height overall, volleyball is second, tennis is third, football is fourth and gymnastics has the lowest mean height. This is probably due to the different advantages heights give you in the respective sports. In basketball, being tall gives you the advantage of being able to block other players, as well as higher vertical meaning you can more easily dunk and score points. In gymnastics, on the other hand, being shorter means you are more maneuverable, therefore able to do more and score higher. 
+
+- Furthermore, the scatter plot shows how heights have changed over time in certain sports. This makes us able to predict the heights in the future.

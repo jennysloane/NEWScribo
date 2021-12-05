@@ -1,7 +1,7 @@
 ---
 title: "How has annual rainfall changed in different Australian cities over the past 20 years?"
 # description: |
-#   A short description of the post.
+#   A short description of the post
 author:
   - name: Benjamin Chamberlain, George Evans, Ben Chau
     url: {}

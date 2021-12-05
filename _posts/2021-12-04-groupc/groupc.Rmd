@@ -12,6 +12,7 @@ output:
 ---
 <!-- have to knit before build -->
 <!-- need space before and after R chunks -->
+<!-- this is Hugo's script  -->
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)

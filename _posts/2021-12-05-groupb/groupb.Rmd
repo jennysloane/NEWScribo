@@ -1,0 +1,115 @@
+---
+title: "How has annual rainfall changed in different Australian cities over the past 20 years?"
+# description: |
+#   A short description of the post.
+author:
+  - name: Benjamin Chamberlain, George Evans, Ben Chau
+    url: {}
+date: 2021-12-05
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+<!-- have to knit before build -->
+<!-- need space before and after R chunks -->
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
+# Project Description
+
+In this project, we are learning about the functions of R studio cloud and use to analyse data sets and answer questions
+
+For this project our group has decided on using the rainfall data set. We are interested in this topic because we think that climate change is an important issue
+
+**Research Question: How has annual rainfall changed in different Australian cities over the past 20 years**
+
+- Our Prediction is that the annual rainfall will be different in cities because some cities are closer to the equator making them warmer than others
+
+# Load libraries 
+
+- We use libraries/packages to make the code easier to read when we code.
+
+```{r}
+library(tidyverse)
+library(ggeasy)
+```
+
+# Read in data
+
+```{r}
+rainfall_data <- read_csv("rainfall.csv")
+```
+
+# Preview the data 
+
+- Our data set shows the recorded rainfall over many years in different Australian cities
+- The variables we are interested in are the city name, rainfall recorded and the years
+
+```{r}
+rainfall_data
+```
+
+# Clean the data
+
+- The first step is to rename your data set. Then you'll want to select all the variables you need, for example, year, city_name and rainfall. Now you want to get rid of any NAs, to do this you must use the function na.omit. now we want to filter the years we want in our data set, for example 1999. Then we need to group the year and city_name. Now finally we need to find the average rainfall per year.
+
+```{r}
+rainfall_final <- rainfall_data %>% 
+  select(year, city_name, rainfall) %>%
+  na.omit() %>%
+  filter(year > 1999) %>%
+  group_by(year, city_name) %>%
+  summarise(mean_rain = mean(rainfall))
+```
+
+# Summary statistics
+
+ - The function range is used to see the range of details within the variables from the first to the last.
+ - The function unique is used to see every single one of the various details/names within the variables.
+
+```{r}
+range(rainfall_data$year)
+unique(rainfall_data$city_name)
+```
+
+# Answer your research question
+
+- To answer our question we must select the variables we need, year, city_name and rainfall. Then the same way as we did before we must get rid of all the NAs. Next we filter the years we want in this case 2000-2020. Finally we group the year and city_names and use the mean function to find the average rainfall per year in the 5 cities. After getting this table we can see that the average rainfall per year is gradually decreasing. We can also see that Brisbane has had the highest amount of rainfall in the past 20 years
+
+```{r}
+rainfall_final <- rainfall_data %>% 
+  select(year, city_name, rainfall) %>%
+  na.omit() %>%
+  filter(year > 1999) %>%
+  group_by(year, city_name) %>%
+  summarise(mean_rain = mean(rainfall))
+
+rainfall_final
+```
+
+# Visualise the results!
+
+```{r}
+ggplot(data = rainfall_final,aes(x = year, y = mean_rain, colour = city_name)) +
+  geom_line()
+```
+
+# Changes to Data
+
+We realized that something was wrong with the data because there was a significant drop in the average rainfall in 2020. To try and find the problem we ran a code to discover how many days were recorded in the year and in the year 2020 there were only 24 recordings. so the data set didn't have records of the full year. to fix this we changed the period of 20 years from > 1999 to 1998-2020.
+
+```{r}
+rainfall_realfinal <- rainfall_data %>% 
+  select(year, city_name, rainfall) %>%
+  na.omit() %>%
+  filter(year > 1998 & year < 2020) %>%
+  group_by(year, city_name) %>%
+  summarise(mean_rain = mean(rainfall))
+
+ggplot(data = rainfall_realfinal,aes(x = year, y = mean_rain, colour = city_name)) +
+  geom_line()
+
+```
